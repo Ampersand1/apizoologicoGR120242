@@ -3,7 +3,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const animalRoutes = require("./routes/animal");
-const areaRoutes = require("./routes/area")
+const areaRoutes = require("./routes/area");
+const authRoutes = require("./routes/authentication");
 const mongoose = require("mongoose");
 require('dotenv').config();
 app.use(parser.urlencoded({ extended: false })); //permite leer los datos que vienen en la petición
@@ -12,6 +13,7 @@ app.use(parser.json()); // transforma los datos a formato JSON
 app.use("/api", animalRoutes);
 app.use("/api", areaRoutes);
 app.use(express.json());
+app.use("/api", authRoutes);
 //Conexión a la base de datos
 mongoose
     .connect(process.env.MONGODB_URI)
